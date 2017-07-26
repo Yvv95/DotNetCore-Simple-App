@@ -1,0 +1,157 @@
+﻿@using Microsoft.AspNetCore.Mvc.Rendering
+
+@using CBRFConverter.Models
+@{
+    Layout = null;
+}
+<html>
+<head>
+    <title>Курс валют</title>
+    <!--ajax. передавать серверу, чтобы он менял значение или в куки-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+
+    <style>
+        .tabs {
+            border-spacing: 7px 11px; /* Расстояние между ячейками */
+        }
+
+        .design {
+            display: inline-block;
+            text-decoration: none;
+            cursor: pointer;
+            font: 12px/1 Arial, sans-serif;
+            color: #B6B8DB;
+            margin-top: 10px;
+        }
+
+        .selected {
+            display: inline-block;
+            text-decoration: none;
+            cursor: pointer;
+            font: 12px/1 Arial, sans-serif;
+            color: #6A87EC;
+            margin-top: 10px;
+        }
+
+        .name {
+            /*position: relative;*/
+            text-align: right;
+            color: #b6b8db;
+            padding: 5px;
+            font-size: 16px;
+             margin: 15px;
+        }
+
+        .rate {
+            /*position: relative;*/
+            font-size: 30px;
+            text-align: right;
+            margin: 40px 20px;
+        }
+
+        .vals {
+            width: 200px;
+            height: 120px;
+            margin: 5px; /* Значение отступов */
+            /*padding: 5px; /* Поля вокруг текста **//
+            border: 5px /*solid black*/; /* Параметры границы */
+            background: #2a2e47; /* Цвет фона */
+            white-space: nowrap;
+            display: inline-block;
+        }
+    </style>
+    <style>
+        body {
+            background: #1E223B;
+            color: #ffffff;
+        }
+
+        hr {
+            border: none;
+            color: #292F4E;
+            background-color: #292F4E;
+            height: 1px;
+        }
+
+
+
+        figure {
+            max-width: 100px;
+        }
+
+        figcaption {
+            text-align: center;
+            color: grey;
+        }
+    </style>
+
+</head>
+<body>
+    <center>
+        <hr>
+        <table class="tabs">
+            <tr>
+                <td>
+                    <figure>
+                        <center>
+                            <a href="/Home/Index/">
+                                @*<img src="~/wwwroot/pics/1.png">*@
+                                <img src="~/pics/1.png">
+                            </a>
+                        </center>
+                        <figcaption><a href="/Home/Index/" class="selected">Курс валют</a></figcaption>
+                    </figure>
+                </td>
+                <td>
+                    <figure>
+                        <center>
+                            <a href="/Home/Dynamic/">
+                                <img src="~/pics/not2.png">
+                            </a>
+                        </center>
+                        <figcaption><a href="/Home/Dynamic/" class="design">Динамика</a></figcaption>
+                    </figure>
+                </td>
+                <td>
+                    <figure>
+                        <center>
+                            <a href="/Home/Convert/">
+                                <img src="~/pics/not3.png">
+                            </a>
+                        </center>
+                        <figcaption><a href="/Home/Convert/" class="design">Кошелек</a></figcaption>
+                    </figure>
+                </td>
+                <td>
+                    <figure>
+                        <center>
+                            <a href="/Home/Settings/">
+                                <img src="~/pics/not4.png">
+                            </a>
+                        </center>
+                        <figcaption><a href="/Home/Settings/" class="design">Настройки</a></figcaption>
+                    </figure>
+                </td>
+            </tr>
+        </table>
+        <hr>
+    </center>
+    <p align="left"><b>Избранные валюты</b></p>
+    <p align="right">Курс от @ViewBag.LoadDate</p>
+
+    @foreach (var val in (Dictionary<string, string>)ViewBag.Vals)
+    {
+        //с помощью span автоперенос
+        <div class="vals">
+            <div class="name">
+                @val.Key
+            </div>
+            <div class="rate">@val.Value</div>
+
+        </div>
+    }
+
+</body>
+
+</html>
